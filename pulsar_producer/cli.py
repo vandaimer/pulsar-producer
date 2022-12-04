@@ -2,7 +2,8 @@ import typer
 
 from pathlib import Path
 from typing import Optional
-from producer import Producer
+
+from pulsar_producer.producer import Producer
 
 
 def main(pulsar_connection_file: Path = typer.Option(...), message_file: Path = typer.Option(...)):
