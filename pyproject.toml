@@ -11,6 +11,8 @@ python = "^3.8"
 pulsar-client = "^2.10.2"
 typer = "^0.7.0"
 
+[tool.poetry.scripts]
+pulsar-producer = 'pulsar_producer.cli:start'
 
 [build-system]
 requires = ["poetry-core"]
