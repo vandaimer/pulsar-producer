@@ -1,23 +1,26 @@
-from typing import Optional
-
 import typer
 
-app = typer.Typer()
+from pathlib import Path
+from typing import Optional
+from producer import Producer
 
-def _version_callback(value: bool) -> None:
-    if value:
-        typer.echo(f"{__app_name__} v{__version__}")
-        raise typer.Exit()
 
-@app.callback()
-def main(
-    version: Optional[bool] = typer.Option(
-        None,
-        "--version",
-        "-v",
-        help="Show the application's version and exit.",
-        callback=_version_callback,
-        is_eager=True,
-    )
-) -> None:
-    return
+def main(pulsar_connection_file: Path = typer.Option(...), message_file: Path = typer.Option(...)):
+    if pulsar_connection_file.exists() is False:
+        print('"{}" does not exists.'.format(pulsar_connection_file))
+        raise typer.Abort()
+
+    if message_file.exists() is False:
+        print('"{}" does not exists.'.format(message_file))
+        raise typer.Abort()
+
+    try:
+        producer = Producer(pulsar_connection_file)
+        producer.send_message(message_file)
+    except Exception as error:
+        print('Exception: {}'.format(error))
+        raise typer.Abort()
+
+
+def start():
+    typer.run(main)
