@@ -14,6 +14,10 @@ First, you should install the CLI on your machine
 
 `pip install pulsar-producer` or `pip install --user pulsar-producer` if you want make it available only for your user.
 
+> **_NOTE:_**  This package still *not* publish on pypi, only on [testing environment](https://test.pypi.org/project/pulsar-producer/0.1.0/#description)
+
+> **_NOTE:_** pip install -i https://test.pypi.org/simple/ pulsar-producer==0.1.0
+
 Then, you need to have an file with your Apache Pulsar server address. This file SHOULD follow a JSON format.
 
 Example:
